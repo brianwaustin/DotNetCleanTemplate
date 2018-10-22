@@ -7,10 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{91C1FB7C-98E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CD10D975-AB15-49F4-B428-51B15C6FE7FB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{06231D3C-9991-4321-AF12-2D4E8DD78FAE}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{4A404B6C-BC76-464A-9A44-D458C47BB56C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetCleanTemplate", "src\DotNetCleanTemplate\DotNetCleanTemplate.csproj", "{9FE5BF1F-3C63-4E6D-B6EE-3CE0F4061749}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetCleanTemplate.Tests", "tests\DotNetCleanTemplate.Tests\DotNetCleanTemplate.Tests.csproj", "{4474FA59-66F2-4FA8-B0A3-C8C0DA4945E1}"

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Serilog;
+using Serilog.Events;
 
 namespace LoggingReferenceProject
 {
@@ -14,7 +16,20 @@ namespace LoggingReferenceProject
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args)
+            Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+            .Enrich.FromLogContext()
+            .WriteTo.Console()
+            .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
+            //.ReadFrom.Configuration(configuration)
+            .CreateLogger();
+
+            try
+            {
+                Log.Information("Starting web host");
+
+                CreateWebHostBuilder(args)
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
                     var env = hostingContext.HostingEnvironment;
@@ -22,15 +37,18 @@ namespace LoggingReferenceProject
                           .AddJsonFile($"appsettings.{env.EnvironmentName}.json",
                               optional: true, reloadOnChange: true);
                     config.AddEnvironmentVariables();
-                })
-                .ConfigureLogging((hostingContext, logging) =>
-                {
-                    logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
-                    logging.AddConsole();
-                    logging.AddDebug();
-                    logging.AddEventSourceLogger();
-                })
-                .Build().Run();
+                })                
+                .UseSerilog() // Add Serilog
+                .Build().Run();                
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Host terminated unexpectedly");               
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }            
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

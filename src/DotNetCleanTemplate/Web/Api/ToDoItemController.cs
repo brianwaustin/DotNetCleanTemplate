@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using DotNetCleanTemplate.Core;
 using DotNetCleanTemplate.Core.Entity;
 using DotNetCleanTemplate.Core.Interfaces;
@@ -8,6 +7,7 @@ using DotNetCleanTemplate.Web.ApiModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Serilog;
 
 namespace DotNetCleanTemplate.Controllers
 {
@@ -16,12 +16,21 @@ namespace DotNetCleanTemplate.Controllers
     public class ToDoItemsController : ControllerBase
     {
         private readonly IRepository _repository;
-        private readonly ILogger _logger;
 
-        public ToDoItemsController(IRepository repository, ILogger<ToDoItemsController> logger)
+        /* Events written will include a property SourceContext with value 
+         * "DotNetCleanTemplate.Controllers.ToDoItemsController" that can 
+         * later be used to filter out noisy events, or selectively write 
+         * them to particular sinks.
+         * 
+         * Not all properties attached to an event need to be represented 
+         * in the message template or output format; all properties are 
+         * carried in a dictionary on the underlying LogEvent object. 
+         */
+        private ILogger myLog = Log.ForContext<ToDoItemsController>();
+
+        public ToDoItemsController(IRepository repository)
         {
-            _repository = repository;
-            _logger = logger;
+            _repository = repository;            
         }
 
         /// <summary>
@@ -31,7 +40,7 @@ namespace DotNetCleanTemplate.Controllers
         [HttpGet]
         public IActionResult ListToDoItems()
         {
-            _logger.LogInformation(LoggingEventsConstants.GetItem, "Getting a list of items");
+            myLog.Information("This is a handler for {Path}", Request.Path);           
 
             var items = _repository.List<ToDoItem>()
                             .Select(ToDoItemDTO.FromToDoItem);
@@ -46,7 +55,7 @@ namespace DotNetCleanTemplate.Controllers
         [HttpGet("{id:int}")]
         public IActionResult GetToDoItemById(int id)
         {
-            _logger.LogInformation(LoggingEventsConstants.GetItem, "Getting item {ID}", id);
+            myLog.Information("Getting item {ID}", id);
             var item = ToDoItemDTO.FromToDoItem(_repository.GetById<ToDoItem>(id));
             return Ok(item);
         }
@@ -94,9 +103,14 @@ namespace DotNetCleanTemplate.Controllers
         [HttpPatch("{id:int}/complete")]
         public IActionResult Complete(int id)
         {
+            var sampleDataLog = Log.ForContext("ToDoItemId", id);
+            sampleDataLog.Information("Completing ToDoItem");  
+
             var toDoItem = _repository.GetById<ToDoItem>(id);
             toDoItem.MarkComplete();
             _repository.Update(toDoItem);
+
+            sampleDataLog.Information("Finished");
 
             return Ok(ToDoItemDTO.FromToDoItem(toDoItem));
         }
@@ -114,7 +128,7 @@ namespace DotNetCleanTemplate.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogWarning(LoggingEventsConstants.InsertItem, ex, "Create new item failed");
+                myLog.Error(ex, "Create new item failed");
             }
 
             return NotFound();

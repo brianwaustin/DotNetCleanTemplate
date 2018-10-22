@@ -12,18 +12,16 @@ using DotNetCleanTemplate.Core.Intefaces;
 using DotNetCleanTemplate.Infrastructure.DomainEvents;
 using StructureMap;
 using DotNetCleanTemplate.Core.SharedKernel;
+using DotNetCleanTemplate.Infrastructure.Logging;
 
 namespace LoggingReferenceProject
 {
     public class Startup
-    {
-        /* Create logs in Startup */
-        private readonly ILogger _logger;
+    {      
 
-        public Startup(IConfiguration configuration, ILogger<Startup> logger)
+        public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
-            _logger = logger;
+            Configuration = configuration;            
         }
 
         public IConfiguration Configuration { get; }
@@ -44,9 +42,9 @@ namespace LoggingReferenceProject
             //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddTransient<IRepository, EfRepository>();
-            services.AddTransient<IDomainEventDispatcher, DomainEventDispatcher>();            
-
-            _logger.LogInformation("Added TodoRepository to services");
+            services.AddTransient<IDomainEventDispatcher, DomainEventDispatcher>();   
+            
+            //_logger.LogInformation("Added TodoRepository to services");
 
             var container = new Container();
 
@@ -79,14 +77,11 @@ namespace LoggingReferenceProject
         /// <param name="app"></param>
         /// <param name="env"></param>
         /// <param name="loggerFactory"></param>        
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
             if (env.IsDevelopment())
             {
-                _logger.LogInformation("In Development environment");
+                //_logger.LogInformation("In Development environment");
                 app.UseDeveloperExceptionPage();
             }
             else
