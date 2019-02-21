@@ -1,6 +1,6 @@
-﻿using CleanArchitecture.Web;
-using DotNetCleanTemplate.Core.Intefaces;
-using DotNetCleanTemplate.Infrastructure.Data;
+﻿using CleanTemplate.Core.Intefaces;
+using CleanTemplate.Infrastructure.Data;
+using CleanTemplate.Web;
 using LoggingReferenceProject;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
