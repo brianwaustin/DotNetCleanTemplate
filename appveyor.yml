@@ -1,0 +1,7 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+environment:
+  CODECOV_TOKEN: 8f16eb75-f0b4-44a2-92cb-da2240108c60
+build:
+  project: DotNetCleanTemplate.sln
+  verbosity: minimal

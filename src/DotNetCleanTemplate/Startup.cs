@@ -12,7 +12,7 @@ using DotNetCleanTemplate.Core.Intefaces;
 using DotNetCleanTemplate.Infrastructure.DomainEvents;
 using StructureMap;
 using DotNetCleanTemplate.Core.SharedKernel;
-using DotNetCleanTemplate.Infrastructure.Logging;
+//using DotNetCleanTemplate.Infrastructure.Logging;
 
 namespace LoggingReferenceProject
 {
