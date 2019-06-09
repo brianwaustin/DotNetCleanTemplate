@@ -1,4 +1,4 @@
-﻿using DotNetCleanTemplate.Core.Events;
+﻿using CleanTemplate.Core.Events;
 using System.Linq;
 using Xunit;
 

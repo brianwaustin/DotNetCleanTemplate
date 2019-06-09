@@ -1,6 +1,6 @@
-﻿using DotNetCleanTemplate.Core.Entity;
-using DotNetCleanTemplate.Core.Intefaces;
-using DotNetCleanTemplate.Infrastructure.Data;
+﻿using CleanTemplate.Core.Entity;
+using CleanTemplate.Core.Intefaces;
+using CleanTemplate.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;

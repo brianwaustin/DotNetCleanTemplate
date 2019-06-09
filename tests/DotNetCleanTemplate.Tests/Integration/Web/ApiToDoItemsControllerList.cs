@@ -1,4 +1,4 @@
-﻿using DotNetCleanTemplate.Core.Entity;
+﻿using CleanTemplate.Core.Entity;
 using LoggingReferenceProject;
 using Newtonsoft.Json;
 using System.Collections.Generic;

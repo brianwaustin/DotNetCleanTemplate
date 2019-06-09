@@ -338,3 +338,4 @@ Logs
 
 #Ignore log files
 **/Logs/*.txt
+/CleanTemplate_coverage.xml

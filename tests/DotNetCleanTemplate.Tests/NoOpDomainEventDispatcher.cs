@@ -1,5 +1,6 @@
-﻿using DotNetCleanTemplate.Core.Intefaces;
-using DotNetCleanTemplate.Core.SharedKernel;
+﻿
+using CleanTemplate.Core.Intefaces;
+using CleanTemplate.Core.SharedKernel;
 
 namespace CleanArchitecture.Tests
 {

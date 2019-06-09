@@ -1,4 +1,4 @@
-﻿using DotNetCleanTemplate.Core.Entity;
+﻿using CleanTemplate.Core.Entity;
 
 namespace CleanArchitecture.Tests
 {
