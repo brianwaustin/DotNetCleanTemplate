@@ -4,6 +4,12 @@
 
 [![codecov](https://codecov.io/gh/brianwaustin/DotNetCleanTemplate/branch/master/graph/badge.svg)](https://codecov.io/gh/brianwaustin/DotNetCleanTemplate)
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=brianwaustin_DotNetCleanTemplate&metric=alert_status)](https://sonarcloud.io/dashboard?id=brianwaustin_DotNetCleanTemplate)
+
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=brianwaustin_DotNetCleanTemplate&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=brianwaustin_DotNetCleanTemplate)
+
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=brianwaustin_DotNetCleanTemplate&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=brianwaustin_DotNetCleanTemplate)
+
 This project is a heavily modified version of the CleanArchitecture template by Steve Smith ([Ardalis.com](https://ardalis.com/)) which aims to add additional boiler plate technologies that are useful for setting up a basic DotNetCore website and APIs.
 
 In particular I have added / adding:
